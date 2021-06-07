@@ -1,0 +1,143 @@
+
+/* علشان البروردر و البادينج ميتحسبش من ضمن الويدث بتاع العنصر */
+* {
+    box-sizing: border-box;
+}
+/* علشان البروردر و البادينج ميتحسبش من ضمن الويدث بتاع العنصر */
+
+body {
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+.control-buttons {
+    position: fixed;    /* في البورزيشن ابسليوت و فيكسيد ممكن تدي ليفت و توب عادي و كمان في البوزيشن فيكسيد مش ابسليوت بس */
+    left: 0;    /* التوب و الليفت مهمين علشان يلزقو من فوق خالص و من الشمال خالص */
+    top: 0;     /* التوب و الليفت مهمين علشان يلزقو من فوق خالص و من الشمال خالص */
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(3, 169, 244, 0.85);
+}
+
+.control-buttons span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 15px 25px;
+    border-radius: 8px;
+    transform: translate(-50px, -50px);  /* هنلاخظ اننا لما عملنا البوزيشن ابسليوت و عملنا التوب و الليفت و بعدين عملنا البادينج فهيا مش في النص قوي فعلشان نحركها من محور السينات و الصادات هتستخدم الترانسفورم ترانسليت و تدي قيمة للاكس و للواي كام بكسل */
+    background-color: red;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.info-container {
+    width: 1080px;
+    margin: 20px auto 0;
+    background-color: #f6f6f6;
+    padding: 20px;
+    font-size: 24px;
+    overflow: hidden;  /* ممكنن عملها بالفيليكس لان هنا احنا عملناها بالفلوت يبقي ممكن نعملها بالفليكس او الفلوت لو هنعملها بالفيليكس هندي الاب اللي هوا دا ديسبلاي فليكس و لو هنعملها بالفلوت هندي الاب ديسبلاي هيدين و الابناء فلوت ليوفت او ريت */
+                        /* ممكن بعد العناصر دي احط كلير فليكس او تدي للاب هايت معين او تستعمل الفليكس دا كلو ماي استخدماللي انت عاوزة */
+    border: 1px solid #2196f3;
+}
+
+.info-container .name {
+    float: left;
+    width: 50%;
+}
+
+.info-container .tries {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.memory-game-blocks {
+    display: flex;      /* لو هنعمل و ننظم البلوكات اللي جوا العنصر دا عن طريق الفليكس بوكس او الديسبلاي فليسكس فهنستخدم في نفس العنصر الاب اولا نديلو ديسبلاي فليكس و كمان نحدد هل الفليكس راب هيكون راب ولا نو راب و في الابناء هنقول هنكتب كود الفليكس المختصر اللي هيعبر اول قيمة عن الفليكس جرو و بعدين الفليكس شرانك و بعدين الفليكس بايز و ال3 قيم دول مهمين جدا ولازم يتكتبو و ممكن بدل ما تستخدم الفليكس بوكس تعمل اوفر فلو هيدين للاب و تعمل فلوت ليفت للابناء بس الصراحة الفليكس بوكس احسن */
+    flex-wrap: wrap;
+    width: 1100px;  /* علشان هيكون فية هامش 10 بكسل من اليمين و الشمال  */
+    margin: 20px auto;
+}
+
+/* useing float and overflow hidden we will delet this */
+/* display: flex; */
+/* flex-wrap: wrap; */
+/*.memory-game-blocks {
+    overflow: hidden;
+    width: 1100px;
+    margin: 20px auto;
+}*/
+
+.memory-game-blocks.no-clicking {
+    pointer-events: none;
+}
+
+.memory-game-blocks .game-block {
+    height: 200px;
+    transition: transform 0.5s;  /* ممكن اقولو ترانسيشن اوول بس انا مش عاوز اقولو اعمل الترانسيشن علي كل حاجة بل انا عاوز يكون الترانسيشن علي الترانسفورم فقط */
+    /* مهم جدا جدا و من غيرو هيحصل مشاكل كتير لو العنصر الاب مخدش ترانسفورم ستايل بريسيرف ثري دي لان الاتنين كارت او اي حاجة جوا الاب دا لو حصلها اي حاجة ثري دي مش هتتنفز الا لو كان الاب واخد الخاصية دي */
+    /* علشان يدي تاثير ال ثري دي للعناصر الابناء اللي جواه */
+    transform-style: preserve-3d;  /* من غير الخاصية دي مش هتعرف تقلب العنصر فيظهر يعني لما تيجي تعمل خاصية الباك فيس فيسابيلتي هيدين مش هتشتغل لانك مش مدي ترانسف فورم ستايل بريسيرف ثري دي */
+    cursor: pointer;
+    position: relative;  /* علشان هندي الفرونتفيس و الباكفيس بوسيشن ابستراكت */
+    flex: 1 0 200px;  /* التقسيمة بتاعتنا حيث ان المتين بكسل دي عرض العنصر بتاعنا  و الصفر هي اللالي و الواحد هلي الترالالي */
+                        /* shorthand property for flex-grow, flex-shrink, flex-basis */
+    margin: 0 10px 20px;
+}
+
+/* using float and overflow hidden we will delete this*/
+/* flex: 1 0 200px; */
+/* .memory-game-blocks .game-block {
+    height: 200px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 200px;
+    margin: 0 10px 20px;
+} */
+
+.memory-game-blocks .game-block .face {
+    position: absolute;  /* بالنسبة لابوهم الجيبم بلوك اللي واخد بوسيشن ريليتف */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    backface-visibility: hidden;
+    border: 5px solid #2196f3;
+}
+
+.memory-game-blocks .game-block .front {
+    background-color: #333;
+    line-height: 200px;  /* نخلية نفس الارتفاع بتاع  الجيبم بلوك بتاعنا علشان انت في الفرونت هتحط علامة استفهام او تعجيب و طبعا لماانا اقولو لاين هايت ميتين فهتكون علامة الاستفهام اللي هتحطها دي متوسطة بالظبط في في نص الديف بتاع الفرونت ولا فوق شوية ولا تحت شوية */
+}
+
+.memory-game-blocks .game-block .front::before {
+    content: '?';
+    color: #fff;
+    font-size: 140px;
+    font-weight: bold;
+}
+
+.memory-game-blocks .game-block .back {
+    background-color: #F00;
+    transform: rotateY(180deg);
+}
+
+.memory-game-blocks .game-block .back img {
+    width: 140px;
+    height: 140px;
+    margin-top: 30px;
+}
+
+/* لو الجيم بلوك اخد الكلاس اللي اسمو از فليبد هيلف الديف دا */
+.memory-game-blocks .game-block.is-flipped,
+.memory-game-blocks .game-block.has-match {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    pointer-events: none;
+    /* علشان محدش بدوس علية لانو خلاص اتفتح فمش محتاجين ان يحصل علية ايفنت كليك */
+}
